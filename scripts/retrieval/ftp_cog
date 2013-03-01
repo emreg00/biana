@@ -1,0 +1,12 @@
+open ftp.ncbi.nih.gov 
+user anonymous p 
+cd pub/COG/COG
+binary
+get fun.txt
+get myva
+get myva=gb
+get org.txt
+get whog
+bye
+quit
+

@@ -1,0 +1,8 @@
+open mint.bio.uniroma2.it 
+user anonymous p 
+cd pub/release/psi/current/psi25/pmids/
+binary
+mget *.psi25.zip
+bye
+quit
+

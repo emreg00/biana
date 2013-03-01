@@ -1,0 +1,7 @@
+include install.sh
+include src/biana/BianaDB/unify.cpp
+recursive-include scripts *.py *.sh 
+graft scripts/administration/external_database_download_scripts/
+prune scripts/administration/log/
+prune scripts/administration/external_database_download_scripts/biana_databases/
+include doc/*

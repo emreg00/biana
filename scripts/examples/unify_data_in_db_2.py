@@ -1,0 +1,2 @@
+from biana.biana_commands import administration
+administration.create_unification_protocol( unification_protocol_name="(p4)(noself)(noprevious)uniprot_seqtax_geneid_scoppdb", list_unification_atom_elements = [([8,11,5,21,7,17,10,12,13,1,2,3],["uniprotaccession"]),([8,11,5,21,7,17,10,12,13,1,2,3],["geneid","taxid"]),([8,11,5,7,17,10,12,13,1,2,3],["geneid"]),([8,19,11,5,21,7,17,16,14,15,10,12,13,1,2,3],["proteinsequence","taxid"]),([20,2,3],["pdb"])], dbname="test_biana", dbuser = "", dbhost = "127.0.0.1", dbpassword = "")

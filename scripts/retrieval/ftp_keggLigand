@@ -1,0 +1,21 @@
+open ftp.genome.jp 
+user anonymous p 
+cd pub/kegg/ligand
+binary
+cd compound
+get compound
+cd ..
+cd drug
+get drug
+cd ..
+cd glycan
+get glycan
+cd ..
+cd enzyme
+get enzyme
+cd ..
+cd reaction
+get reaction
+bye
+quit
+

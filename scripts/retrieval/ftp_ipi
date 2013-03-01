@@ -1,0 +1,8 @@
+open ftp.ebi.ac.uk 
+user anonymous p 
+cd pub/databases/IPI/current
+binary
+mget ipi.*.fasta.gz
+bye
+quit
+

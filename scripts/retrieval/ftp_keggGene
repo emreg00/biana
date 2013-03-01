@@ -1,0 +1,11 @@
+open ftp.genome.jp 
+user anonymous p 
+binary
+cd pub/kegg/
+cd release/current/
+get genes.tar.gz
+cd ../../genes
+get ko
+bye
+quit
+

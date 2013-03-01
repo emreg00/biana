@@ -1,0 +1,9 @@
+open ftp.uniprot.org
+user anonymous p 
+cd pub/databases/uniprot/current_release/knowledgebase/complete
+binary
+get uniprot_sprot.dat.gz
+get uniprot_trembl.dat.gz
+bye
+quit
+

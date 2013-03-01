@@ -1,0 +1,8 @@
+open ftpmips.gsf.de
+user anonymous p 
+cd /yeast/PPI
+binary
+get mpact-complete.psi25.xml.gz
+bye
+quit
+

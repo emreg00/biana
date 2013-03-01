@@ -1,0 +1,9 @@
+open ftp.ncbi.nih.gov
+user anonymous p 
+cd blast/db/FASTA
+get nr.gz
+get pdbaa.gz
+get swissprot.gz
+bye
+quit
+

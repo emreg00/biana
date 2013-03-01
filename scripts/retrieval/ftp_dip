@@ -1,0 +1,8 @@
+open dip.doe-mbi.ucla.edu
+user XXX XXX
+cd 2013/mif25/
+binary
+get dip20130131.mif25.gz
+bye
+quit
+

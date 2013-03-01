@@ -1,0 +1,8 @@
+open ftp.geneontology.org
+user anonymous p 
+cd pub/go/gene-associations/
+binary
+mget *.gz
+bye
+quit
+

@@ -1,0 +1,10 @@
+open ftp://ftp.sanger.ac.uk/pub/databases/Pfam 
+user anonymous p 
+cd current_release
+binary
+get Pfam-A.full.gz
+get Pfam-B.gz
+get pfamseq.gz
+bye
+quit
+
