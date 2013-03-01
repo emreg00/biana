@@ -1,0 +1,45 @@
+
+* Before creating distribution, update/commit changes to repository and tag. So typically:
+cvs update -Pd
+cvs commit -m "if necessary"
+cvs tag -R v1-2
+sh create_and_upload_biana_distribution.sh v1-2 1.2
+
+* For creating windows setup, it is required to have a windows installed with innodb setup and run inno_setup_script.iss (modify the paths inside as necessary). Then it should be uploaded to the webserver. 
+
+* The web page should be updated so that, the new packages are made available.
+
+create_and_upload_biana_distribution.sh: 
+    - Takes 2 parameters: cvs tag to export and biana version to send to server(appended after biana.v)
+    - Checks out that cvs version to biana_distribution
+    - Compiles java & tex files
+    - Calls create_windows_release.sh with biana_distribution
+
+create_windows_release.sh:
+    - Takes 1 parameter: folder where biana files reside
+    - Uses windows_biana_release_files.tar.gz and MySQLdb_windows.tar.gz files to genereate windows_files_to_compile_with_innosetup.tar.gz
+
+create_installer_in_windows.sh:
+    - Script to create windows installer using Inno setup in windows
+    - Downloads & extracts windows_files_to_compile_with_innosetup.tar.gz from web and then compiles
+
+MySQLdb_windows.tar.gz: 
+    - Windows precompiled MySQLdb lib
+    - For linux MySQLdb and networkx is already in CVS
+
+windows_files_to_compile_with_innosetup.tar.gz:
+    - Created by create_windows_release.sh
+    - Use this file to create a windows installer on a Windows system => OBSOLETE, now use create_installer_in_windows.sh script with CygWin in Windows
+
+inno_setup_script.iss:
+    - Inno setup file copied each time to windows_files_to_compile_with_innosetup.tar.gz
+
+README: 
+    - This file
+
+windows_biana_release_files.tar.gz:
+    - Windows precompiled mysql and python programs
+
+Biana_license.txt:
+    - BIANA license file
+
