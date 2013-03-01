@@ -1,17 +1,9 @@
 
 # Database details
-#dbhost=sefarad
 dbhost=ben-yehuda
-#dbhost=127.0.0.1
-dbname=test_BIANA_JANUARY_2013 #test_biana #_small #new #emre
-#dbname=pianav2 
-#dbname=biana_beta
-#dbuser=piana
-dbuser="jgarcia" #emre
-#dbuser=bianaweb
+dbname=test_BIANA_MARCH_2013 
+dbuser="jgarcia" 
 dbpass="" # for no password
-#dbpass=piana
-#dbpass=pianaBiana
 
 # Get command line arguments
 parser=$1 

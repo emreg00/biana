@@ -17,8 +17,6 @@
 
 """
 
-import sys
-import re
 from bianaParser import *
 
 class GOGOAParser(BianaParser):
