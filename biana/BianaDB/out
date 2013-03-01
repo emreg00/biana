@@ -1,0 +1,737 @@
+
+RCS file: /usr/local/CVS/biana/biana/src/biana/BianaDB/BianaDBaccess.py,v
+Working file: BianaDBaccess.py
+head: 1.161
+branch:
+locks: strict
+access list:
+symbolic names:
+	v1-2-7: 1.159
+	v1-2-6: 1.156
+	v1-2-5: 1.156
+	v1-2-4: 1.156
+	v1-2-3: 1.156
+	v-1-2-2: 1.156
+	v1-2-1: 1.156
+	v1-2: 1.156
+	v1-1-13: 1.154
+	v1-1-12-unify: 1.152
+	v1-1-12: 1.151
+	v1-1-11: 1.149
+	v1-1-10: 1.149
+	v1-1-9: 1.149
+	v1-1-8: 1.149
+	v1-1-7: 1.149
+	v1-1-6: 1.149
+	v1-1-5: 1.148
+	v1-1-4: 1.148
+	v1-1-3: 1.148
+	v1-1-2: 1.148
+	v1-1-1: 1.147
+	v1-1-0: 1.147
+	biana_release020: 1.139
+	biana_release018: 1.138
+	biana_release_016: 1.138
+	release_016: 1.138
+	biana_release015: 1.138
+	biana_release014: 1.138
+	biana_release013: 1.135
+	biana_release012: 1.134
+	biana_release011: 1.134
+	biana_release010: 1.134
+	biana_release09: 1.134
+	biana_release08: 1.134
+	biana_release07: 1.134
+	biana_release06: 1.133
+	biana_release05: 1.133
+	biana_release04: 1.131
+	biana_release03: 1.127
+	test_tutorial: 1.124
+	biana_release02: 1.124
+	biana_release01: 1.124
+	Mar_13_09: 1.117
+	Feb_24_09: 1.116
+	tutorial5: 1.106
+	tutorial4: 1.100
+	tutorial3: 1.99
+	tutorial2: 1.93
+	tutorial1: 1.92
+	biana_beta_v0: 1.74
+	before_refactoring_BianaSessionManager: 1.70
+	nov_08_1: 1.63
+	oct_08_3: 1.58
+	oct_08_2: 1.57
+	oct_08: 1.56
+	biana_v0_20: 1.53
+	biana_v0_19: 1.52
+	biana_v0_18: 1.50
+	biana_v0_17: 1.48
+	biana_v0_16: 1.47
+	biana_v0_15: 1.44
+	biana_v0_14: 1.40
+	biana_v0_13: 1.29
+	biana_v0_10: 1.28
+	biana_v0_9: 1.28
+	biana_v0_8: 1.28
+	biana_v0_7: 1.28
+	biana_v0_6: 1.26
+	biana_v0_5: 1.24
+	biana_v0_4: 1.20
+	biana_v0_3: 1.18
+	biana_v0_2: 1.15
+	biana_v0: 1.13
+	start: 1.1.1.1
+	jgarcia: 1.1.1
+keyword substitution: kv
+total revisions: 162;	selected revisions: 162
+description:
+----------------------------
+revision 1.161
+date: 2010/03/01 15:54:37;  author: jgarcia;  state: Exp;  lines: +5 -3
+javi
+----------------------------
+revision 1.160
+date: 2010/02/03 10:16:05;  author: emre;  state: Exp;  lines: +184 -0
+graph utilities analyze network R / arff method addition, BianaDBaccess ouput_relations / output_user_entities method addition
+----------------------------
+revision 1.159
+date: 2009/11/24 13:44:33;  author: emre;  state: Exp;  lines: +5 -4
+fixed bug in outputting only_uniques
+----------------------------
+revision 1.158
+date: 2009/11/23 08:14:11;  author: jgarcia;  state: Exp;  lines: +33 -1
+javi
+----------------------------
+revision 1.157
+date: 2009/11/20 13:20:05;  author: emre;  state: Exp;  lines: +19 -13
+fixes/improvements in biana utilities, addition of output_only_unique_values (only_native in interface) for outputting only primary refs
+----------------------------
+revision 1.156
+date: 2009/10/29 14:25:27;  author: jgarcia;  state: Exp;  lines: +5 -2
+javi
+----------------------------
+revision 1.155
+date: 2009/10/28 10:35:41;  author: jgarcia;  state: Exp;  lines: +4 -4
+javi
+----------------------------
+revision 1.154
+date: 2009/10/05 19:42:38;  author: emre;  state: Exp;  lines: +1 -1
+tutorial spell checking, get_interactome script addition, IN clause bug in ontology retrieval fixed
+----------------------------
+revision 1.153
+date: 2009/10/02 18:29:40;  author: emre;  state: Exp;  lines: +2 -2
+unify a db with itself rollback, BIANA GUI comments
+----------------------------
+revision 1.152
+date: 2009/08/24 14:39:12;  author: emre;  state: Exp;  lines: +9 -2
+unification related modifications (type != previous, no self unification, parsers provide taxid & proteinsequence type)
+----------------------------
+revision 1.151
+date: 2009/08/21 09:43:25;  author: emre;  state: Exp;  lines: +1 -1
+comment out print equivalence query
+----------------------------
+revision 1.150
+date: 2009/08/21 09:12:23;  author: emre;  state: Exp;  lines: +2 -4
+fixed pdb attribute chain bug in promiscuous unification
+----------------------------
+revision 1.149
+date: 2009/08/07 13:07:18;  author: jgarcia;  state: Exp;  lines: +5 -3
+javi
+----------------------------
+revision 1.148
+date: 2009/07/28 08:24:13;  author: jgarcia;  state: Exp;  lines: +2 -2
+javi
+----------------------------
+revision 1.147
+date: 2009/07/23 14:46:17;  author: jgarcia;  state: Exp;  lines: +144 -33
+javi
+----------------------------
+revision 1.146
+date: 2009/07/23 12:37:15;  author: jgarcia;  state: Exp;  lines: +24 -309
+javi
+----------------------------
+revision 1.145
+date: 2009/07/22 15:15:53;  author: jgarcia;  state: Exp;  lines: +0 -1
+javi
+----------------------------
+revision 1.144
+date: 2009/07/22 09:30:39;  author: emre;  state: Exp;  lines: +2 -1
+*** empty log message ***
+----------------------------
+revision 1.143
+date: 2009/07/21 16:56:35;  author: emre;  state: Exp;  lines: +9 -1
+*** empty log message ***
+----------------------------
+revision 1.142
+date: 2009/07/20 08:31:14;  author: jgarcia;  state: Exp;  lines: +2 -0
+javi
+----------------------------
+revision 1.141
+date: 2009/07/10 14:12:26;  author: jgarcia;  state: Exp;  lines: +121 -1
+javi
+----------------------------
+revision 1.140
+date: 2009/07/09 13:35:54;  author: emre;  state: Exp;  lines: +2 -1
+commit after a while, small bugs, built in networkx & mysqldb installation
+----------------------------
+revision 1.139
+date: 2009/05/25 19:01:30;  author: jgarcia;  state: Exp;  lines: +6 -2
+jav
+----------------------------
+revision 1.138
+date: 2009/05/10 09:09:33;  author: emre;  state: Exp;  lines: +1 -0
+*** empty log message ***
+----------------------------
+revision 1.137
+date: 2009/05/06 10:26:17;  author: emre;  state: Exp;  lines: +66 -41
+*** empty log message ***
+----------------------------
+revision 1.136
+date: 2009/05/05 13:29:30;  author: emre;  state: Exp;  lines: +1 -0
+*** empty log message ***
+----------------------------
+revision 1.135
+date: 2009/04/28 12:18:37;  author: jgarcia;  state: Exp;  lines: +20 -0
+javi
+----------------------------
+revision 1.134
+date: 2009/04/13 15:10:11;  author: emre;  state: Exp;  lines: +2 -1
+*** empty log message ***
+----------------------------
+revision 1.133
+date: 2009/04/07 10:21:48;  author: jgarcia;  state: Exp;  lines: +11 -7
+javi
+----------------------------
+revision 1.132
+date: 2009/04/06 15:46:52;  author: emre;  state: Exp;  lines: +3 -4
+*** empty log message ***
+----------------------------
+revision 1.131
+date: 2009/04/05 10:01:59;  author: jgarcia;  state: Exp;  lines: +3 -0
+javi
+----------------------------
+revision 1.130
+date: 2009/04/05 09:55:00;  author: emre;  state: Exp;  lines: +1 -1
+*** empty log message ***
+----------------------------
+revision 1.129
+date: 2009/04/05 07:23:09;  author: jgarcia;  state: Exp;  lines: +2 -1
+javi
+----------------------------
+revision 1.128
+date: 2009/03/31 16:58:29;  author: emre;  state: Exp;  lines: +1 -1
+*** empty log message ***
+----------------------------
+revision 1.127
+date: 2009/03/31 10:05:01;  author: emre;  state: Exp;  lines: +59 -18
+*** empty log message ***
+----------------------------
+revision 1.126
+date: 2009/03/29 10:29:51;  author: emre;  state: Exp;  lines: +17 -11
+*** empty log message ***
+----------------------------
+revision 1.125
+date: 2009/03/26 16:53:49;  author: emre;  state: Exp;  lines: +2 -5
+*** empty log message ***
+----------------------------
+revision 1.124
+date: 2009/03/20 13:29:18;  author: emre;  state: Exp;  lines: +1 -1
+*** empty log message ***
+----------------------------
+revision 1.123
+date: 2009/03/20 10:42:10;  author: jgarcia;  state: Exp;  lines: +8 -7
+javi
+----------------------------
+revision 1.122
+date: 2009/03/19 18:20:42;  author: emre;  state: Exp;  lines: +1 -1
+*** empty log message ***
+----------------------------
+revision 1.121
+date: 2009/03/19 10:10:53;  author: jgarcia;  state: Exp;  lines: +147 -87
+javi
+----------------------------
+revision 1.120
+date: 2009/03/18 09:02:55;  author: jgarcia;  state: Exp;  lines: +247 -340
+javi
+----------------------------
+revision 1.119
+date: 2009/03/17 08:05:02;  author: jgarcia;  state: Exp;  lines: +85 -33
+javi
+----------------------------
+revision 1.118
+date: 2009/03/16 14:51:29;  author: jgarcia;  state: Exp;  lines: +566 -774
+javi
+----------------------------
+revision 1.117
+date: 2009/03/13 22:06:40;  author: jgarcia;  state: Exp;  lines: +245 -18
+javi
+----------------------------
+revision 1.116
+date: 2009/03/12 17:03:04;  author: jgarcia;  state: Exp;  lines: +256 -29
+javi
+----------------------------
+revision 1.115
+date: 2009/03/10 16:56:28;  author: jgarcia;  state: Exp;  lines: +8 -6
+javi
+----------------------------
+revision 1.114
+date: 2009/03/10 15:41:20;  author: jgarcia;  state: Exp;  lines: +17 -5
+javi
+----------------------------
+revision 1.113
+date: 2009/03/09 19:13:24;  author: jgarcia;  state: Exp;  lines: +13 -14
+javi
+----------------------------
+revision 1.112
+date: 2009/03/06 10:46:19;  author: jgarcia;  state: Exp;  lines: +20 -7
+javi
+----------------------------
+revision 1.111
+date: 2009/03/06 08:04:57;  author: emre;  state: Exp;  lines: +5 -5
+*** empty log message ***
+----------------------------
+revision 1.110
+date: 2009/03/05 19:38:14;  author: emre;  state: Exp;  lines: +2 -2
+*** empty log message ***
+----------------------------
+revision 1.109
+date: 2009/03/05 16:11:02;  author: jgarcia;  state: Exp;  lines: +12 -3
+javi
+----------------------------
+revision 1.108
+date: 2009/03/05 14:11:42;  author: jgarcia;  state: Exp;  lines: +4 -2
+javi
+----------------------------
+revision 1.107
+date: 2009/03/04 19:13:15;  author: jgarcia;  state: Exp;  lines: +0 -1
+*** empty log message ***
+----------------------------
+revision 1.106
+date: 2009/03/04 15:52:24;  author: jgarcia;  state: Exp;  lines: +112 -40
+javi
+----------------------------
+revision 1.105
+date: 2009/03/04 11:35:20;  author: emre;  state: Exp;  lines: +2 -3
+*** empty log message ***
+----------------------------
+revision 1.104
+date: 2009/03/03 18:24:02;  author: emre;  state: Exp;  lines: +3 -0
+*** empty log message ***
+----------------------------
+revision 1.103
+date: 2009/03/03 17:57:43;  author: emre;  state: Exp;  lines: +1 -0
+*** empty log message ***
+----------------------------
+revision 1.102
+date: 2009/03/03 12:43:18;  author: emre;  state: Exp;  lines: +0 -1
+*** empty log message ***
+----------------------------
+revision 1.101
+date: 2009/03/02 19:45:01;  author: emre;  state: Exp;  lines: +27 -0
+*** empty log message ***
+----------------------------
+revision 1.100
+date: 2009/03/02 15:54:36;  author: jgarcia;  state: Exp;  lines: +1 -2
+javi
+----------------------------
+revision 1.99
+date: 2009/03/02 14:51:50;  author: jgarcia;  state: Exp;  lines: +3 -1
+javi
+----------------------------
+revision 1.98
+date: 2009/03/01 16:18:02;  author: emre;  state: Exp;  lines: +9 -2
+*** empty log message ***
+----------------------------
+revision 1.97
+date: 2009/02/27 15:25:05;  author: jgarcia;  state: Exp;  lines: +31 -28
+javi
+----------------------------
+revision 1.96
+date: 2009/02/27 15:12:43;  author: emre;  state: Exp;  lines: +15 -5
+*** empty log message ***
+----------------------------
+revision 1.95
+date: 2009/02/26 18:58:27;  author: emre;  state: Exp;  lines: +8 -2
+*** empty log message ***
+----------------------------
+revision 1.94
+date: 2009/02/25 18:46:25;  author: emre;  state: Exp;  lines: +2 -2
+examples workout + tooltips
+----------------------------
+revision 1.93
+date: 2009/02/25 16:30:16;  author: jgarcia;  state: Exp;  lines: +1 -0
+*** empty log message ***
+----------------------------
+revision 1.92
+date: 2009/02/25 10:00:49;  author: emre;  state: Exp;  lines: +36 -29
+tooltips
+----------------------------
+revision 1.91
+date: 2009/02/24 16:07:43;  author: emre;  state: Exp;  lines: +4 -4
+*** empty log message ***
+----------------------------
+revision 1.90
+date: 2009/02/24 15:44:13;  author: emre;  state: Exp;  lines: +3 -2
+*** empty log message ***
+----------------------------
+revision 1.89
+date: 2009/02/24 15:33:57;  author: jgarcia;  state: Exp;  lines: +233 -49
+*** empty log message ***
+----------------------------
+revision 1.88
+date: 2009/02/23 13:05:54;  author: emre;  state: Exp;  lines: +4 -4
+gui bindings for export user entity set data
+----------------------------
+revision 1.87
+date: 2009/02/22 23:08:53;  author: emre;  state: Exp;  lines: +4 -2
+output fasta method in BianaSessionManager + utilities.FastaWriter
+----------------------------
+revision 1.86
+date: 2009/02/20 18:59:03;  author: emre;  state: Exp;  lines: +30 -20
+*** empty log message ***
+----------------------------
+revision 1.85
+date: 2009/02/20 17:10:08;  author: jgarcia;  state: Exp;  lines: +39 -29
+*** empty log message ***
+----------------------------
+revision 1.84
+date: 2009/02/19 18:01:33;  author: emre;  state: Exp;  lines: +2 -1
+sorting attributes in create unification protocol GUI
+----------------------------
+revision 1.83
+date: 2009/02/19 16:17:43;  author: emre;  state: Exp;  lines: +8 -0
+default external entity type addition to parsers + createNewUnification panel attr sort
+----------------------------
+revision 1.82
+date: 2009/02/17 18:29:55;  author: emre;  state: Exp;  lines: +3 -1
+*** empty log message ***
+----------------------------
+revision 1.81
+date: 2009/02/17 13:59:29;  author: jgarcia;  state: Exp;  lines: +61 -1
+*** empty log message ***
+----------------------------
+revision 1.80
+date: 2009/02/12 17:32:19;  author: jgarcia;  state: Exp;  lines: +6 -4
+*** empty log message ***
+----------------------------
+revision 1.79
+date: 2009/02/11 09:25:52;  author: emre;  state: Exp;  lines: +5 -20
+*** empty log message ***
+----------------------------
+revision 1.78
+date: 2009/02/09 10:50:11;  author: emre;  state: Exp;  lines: +12 -6
+BianaDBaccess close() on parse error & _get_new_transfer_id() bug fix
+----------------------------
+revision 1.77
+date: 2009/02/04 16:09:34;  author: jgarcia;  state: Exp;  lines: +2 -2
+*** empty log message ***
+----------------------------
+revision 1.76
+date: 2009/02/04 13:43:15;  author: emre;  state: Exp;  lines: +102 -40
+last_id & scop parser
+----------------------------
+revision 1.75
+date: 2009/01/27 14:31:53;  author: jgarcia;  state: Exp;  lines: +340 -683
+javi
+----------------------------
+revision 1.74
+date: 2008/12/27 19:05:43;  author: emre;  state: Exp;  lines: +23 -14
+most probably last commit of 2008
+----------------------------
+revision 1.73
+date: 2008/12/16 16:30:03;  author: emre;  state: Exp;  lines: +1 -1
+output_user_entity_set_network only selected
+----------------------------
+revision 1.72
+date: 2008/11/28 06:48:26;  author: jgarcia;  state: Exp;  lines: +97 -44
+*** empty log message ***
+----------------------------
+revision 1.71
+date: 2008/11/28 00:38:47;  author: jgarcia;  state: Exp;  lines: +74 -58
+*** empty log message ***
+----------------------------
+revision 1.70
+date: 2008/11/20 18:19:36;  author: jgarcia;  state: Exp;  lines: +136 -15
+javi
+----------------------------
+revision 1.69
+date: 2008/11/17 16:51:13;  author: emre;  state: Exp;  lines: +1 -1
+gener/al2ic
+----------------------------
+revision 1.68
+date: 2008/11/17 06:33:23;  author: jgarcia;  state: Exp;  lines: +1 -1
+javi
+----------------------------
+revision 1.67
+date: 2008/11/17 06:00:34;  author: jgarcia;  state: Exp;  lines: +74 -28
+javi
+----------------------------
+revision 1.66
+date: 2008/11/16 00:27:29;  author: jgarcia;  state: Exp;  lines: +71 -22
+javi
+----------------------------
+revision 1.65
+date: 2008/11/15 08:12:40;  author: jgarcia;  state: Exp;  lines: +47 -20
+javi
+----------------------------
+revision 1.64
+date: 2008/11/14 21:26:58;  author: emre;  state: Exp;  lines: +11 -11
+*** empty log message ***
+----------------------------
+revision 1.63
+date: 2008/11/14 08:27:39;  author: jgarcia;  state: Exp;  lines: +76 -251
+javi
+----------------------------
+revision 1.62
+date: 2008/11/11 17:03:28;  author: emre;  state: Exp;  lines: +1 -1
+string latest changes
+----------------------------
+revision 1.61
+date: 2008/11/07 20:26:05;  author: emre;  state: Exp;  lines: +6 -5
+EERA removal update first cross-checks
+----------------------------
+revision 1.60
+date: 2008/11/07 08:34:06;  author: jgarcia;  state: Exp;  lines: +6 -4
+*** empty log message ***
+----------------------------
+revision 1.59
+date: 2008/11/06 02:35:11;  author: jgarcia;  state: Exp;  lines: +102 -1045
+javi
+----------------------------
+revision 1.58
+date: 2008/11/03 18:25:43;  author: emre;  state: Exp;  lines: +1 -1
+*** empty log message ***
+----------------------------
+revision 1.57
+date: 2008/10/31 19:21:14;  author: jgarcia;  state: Exp;  lines: +66 -2
+javi_modifications
+----------------------------
+revision 1.56
+date: 2008/10/31 16:37:34;  author: emre;  state: Exp;  lines: +3 -0
+problematic string
+----------------------------
+revision 1.55
+date: 2008/10/27 16:04:29;  author: raragues;  state: Exp;  lines: +9 -1
+small change sessionmanager
+----------------------------
+revision 1.54
+date: 2008/10/14 15:06:22;  author: emre;  state: Exp;  lines: +8 -2
+javinusajamming
+----------------------------
+revision 1.53
+date: 2008/09/22 04:27:15;  author: jgarcia;  state: Exp;  lines: +123 -75
+*** empty log message ***
+----------------------------
+revision 1.52
+date: 2008/08/14 19:24:36;  author: jgarcia;  state: Exp;  lines: +51 -24
+*** empty log message ***
+----------------------------
+revision 1.51
+date: 2008/08/13 16:29:04;  author: jgarcia;  state: Exp;  lines: +85 -40
+*** empty log message ***
+----------------------------
+revision 1.50
+date: 2008/08/13 10:14:58;  author: jgarcia;  state: Exp;  lines: +24 -28
+*** empty log message ***
+----------------------------
+revision 1.49
+date: 2008/08/13 08:08:47;  author: jgarcia;  state: Exp;  lines: +802 -7
+emre_plus_javi
+----------------------------
+revision 1.48
+date: 2008/08/11 01:36:58;  author: emre;  state: Exp;  lines: +110 -28
+squence expansion windows GUI-biana binding
+----------------------------
+revision 1.47
+date: 2008/08/05 08:24:03;  author: emre;  state: Exp;  lines: +7 -2
+*** empty log message ***
+----------------------------
+revision 1.46
+date: 2008/08/01 16:13:49;  author: jgarcia;  state: Exp;  lines: +111 -11
+*** empty log message ***
+----------------------------
+revision 1.45
+date: 2008/07/30 13:57:05;  author: jgarcia;  state: Exp;  lines: +8 -3
+*** empty log message ***
+----------------------------
+revision 1.44
+date: 2008/07/25 12:12:07;  author: jgarcia;  state: Exp;  lines: +4 -4
+previous_groups
+----------------------------
+revision 1.43
+date: 2008/07/24 12:52:58;  author: emre;  state: Exp;  lines: +2 -1
+props bs
+----------------------------
+revision 1.42
+date: 2008/07/23 18:03:54;  author: jgarcia;  state: Exp;  lines: +7 -5
+javi
+----------------------------
+revision 1.41
+date: 2008/07/23 10:51:07;  author: jgarcia;  state: Exp;  lines: +12 -0
+ordinador_joan
+----------------------------
+revision 1.40
+date: 2008/07/23 10:44:08;  author: jgarcia;  state: Exp;  lines: +18 -5
+javi
+----------------------------
+revision 1.39
+date: 2008/07/21 17:35:32;  author: jgarcia;  state: Exp;  lines: +6 -2
+ordinador_joan
+----------------------------
+revision 1.38
+date: 2008/07/21 14:56:52;  author: jgarcia;  state: Exp;  lines: +157 -9
+javi
+----------------------------
+revision 1.37
+date: 2008/07/18 14:49:10;  author: jgarcia;  state: Exp;  lines: +265 -45
+*** empty log message ***
+----------------------------
+revision 1.36
+date: 2008/07/17 12:15:15;  author: emre;  state: Exp;  lines: +12 -2
+relation restrictions + vizmap correction
+----------------------------
+revision 1.35
+date: 2008/07/15 16:38:06;  author: jgarcia;  state: Exp;  lines: +171 -118
+*** empty log message ***
+----------------------------
+revision 1.34
+date: 2008/07/15 16:21:56;  author: emre;  state: Exp;  lines: +1 -1
+*** empty log message ***
+----------------------------
+revision 1.33
+date: 2008/07/15 14:12:56;  author: jgarcia;  state: Exp;  lines: +68 -31
+*** empty log message ***
+----------------------------
+revision 1.32
+date: 2008/07/15 13:00:31;  author: emre;  state: Exp;  lines: +3 -3
+user entity type dictionary copying correction + vizmap
+----------------------------
+revision 1.31
+date: 2008/07/14 15:39:21;  author: emre;  state: Exp;  lines: +81 -23
+biana-cytoscape type communication
+----------------------------
+revision 1.30
+date: 2008/07/14 13:57:40;  author: jgarcia;  state: Exp;  lines: +12 -0
+*** empty log message ***
+----------------------------
+revision 1.29
+date: 2008/07/09 08:56:10;  author: jgarcia;  state: Exp;  lines: +21 -14
+*** empty log message ***
+----------------------------
+revision 1.28
+date: 2008/07/07 23:00:52;  author: emre;  state: Exp;  lines: +3 -1
+restriction copy
+----------------------------
+revision 1.27
+date: 2008/07/04 19:07:48;  author: jgarcia;  state: Exp;  lines: +34 -9
+*** empty log message ***
+----------------------------
+revision 1.26
+date: 2008/07/03 16:41:51;  author: jgarcia;  state: Exp;  lines: +229 -14
+javi
+----------------------------
+revision 1.25
+date: 2008/07/03 16:38:28;  author: emre;  state: Exp;  lines: +8 -7
+relation-edge dictionary conversion
+----------------------------
+revision 1.24
+date: 2008/07/01 16:49:28;  author: jgarcia;  state: Exp;  lines: +7 -13
+*** empty log message ***
+----------------------------
+revision 1.23
+date: 2008/06/29 15:42:24;  author: jgarcia;  state: Exp;  lines: +109 -46
+*** empty log message ***
+----------------------------
+revision 1.22
+date: 2008/06/19 12:42:36;  author: jgarcia;  state: Exp;  lines: +102 -26
+javi19_june
+----------------------------
+revision 1.21
+date: 2008/06/16 19:12:28;  author: jgarcia;  state: Exp;  lines: +3 -0
+*** empty log message ***
+----------------------------
+revision 1.20
+date: 2008/06/11 09:29:50;  author: jgarcia;  state: Exp;  lines: +52 -27
+*** empty log message ***
+----------------------------
+revision 1.19
+date: 2008/06/06 11:08:06;  author: jgarcia;  state: Exp;  lines: +373 -273
+after major ontology changes
+----------------------------
+revision 1.18
+date: 2008/05/28 19:30:05;  author: emre;  state: Exp;  lines: +1 -1
+abc
+----------------------------
+revision 1.17
+date: 2008/05/28 14:42:04;  author: jgarcia;  state: Exp;  lines: +69 -9
+*** empty log message ***
+----------------------------
+revision 1.16
+date: 2008/05/26 21:34:49;  author: emre;  state: Exp;  lines: +17 -3
+*** empty log message ***
+----------------------------
+revision 1.15
+date: 2008/05/26 11:10:11;  author: jgarcia;  state: Exp;  lines: +1 -1
+*** empty log message ***
+----------------------------
+revision 1.14
+date: 2008/05/26 10:21:15;  author: jgarcia;  state: Exp;  lines: +1 -40
+*** empty log message ***
+----------------------------
+revision 1.13
+date: 2008/05/23 13:41:55;  author: jgarcia;  state: Exp;  lines: +210 -82
+*** empty log message ***
+----------------------------
+revision 1.12
+date: 2008/05/19 17:58:01;  author: jgarcia;  state: Exp;  lines: +43 -49
+*** empty log message ***
+----------------------------
+revision 1.11
+date: 2008/05/19 09:01:49;  author: jgarcia;  state: Exp;  lines: +74 -28
+*** empty log message ***
+----------------------------
+revision 1.10
+date: 2008/05/16 18:52:56;  author: jgarcia;  state: Exp;  lines: +15 -6
+*** empty log message ***
+----------------------------
+revision 1.9
+date: 2008/05/16 16:23:37;  author: jgarcia;  state: Exp;  lines: +120 -72
+*** empty log message ***
+----------------------------
+revision 1.8
+date: 2008/05/16 12:23:37;  author: jgarcia;  state: Exp;  lines: +215 -20
+*** empty log message ***
+----------------------------
+revision 1.7
+date: 2008/05/14 17:45:16;  author: jgarcia;  state: Exp;  lines: +1 -1
+*** empty log message ***
+----------------------------
+revision 1.6
+date: 2008/05/13 10:51:50;  author: jgarcia;  state: Exp;  lines: +1 -1
+*** empty log message ***
+----------------------------
+revision 1.5
+date: 2008/05/09 16:58:30;  author: jgarcia;  state: Exp;  lines: +4 -4
+*** empty log message ***
+----------------------------
+revision 1.4
+date: 2008/05/09 11:08:27;  author: jgarcia;  state: Exp;  lines: +264 -123
+*** empty log message ***
+----------------------------
+revision 1.3
+date: 2008/05/06 18:28:48;  author: jgarcia;  state: Exp;  lines: +56 -154
+*** empty log message ***
+----------------------------
+revision 1.2
+date: 2008/05/06 14:55:02;  author: jgarcia;  state: Exp;  lines: +20 -33
+*** empty log message ***
+----------------------------
+revision 1.1
+date: 2008/05/06 11:41:55;  author: jgarcia;  state: Exp;
+branches:  1.1.1;
+Initial revision
+----------------------------
+revision 1.1.1.1
+date: 2008/05/06 11:41:55;  author: jgarcia;  state: Exp;  lines: +0 -0
+BIANA PROJECT
+=============================================================================
