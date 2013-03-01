@@ -3,3 +3,55 @@ biana
 
 BIANA - A python framework for Biological Integration And Network Analysis 
 
+INSTALLATION
+
+A- Installation with system administration previliges (which will install biana in site-packages of default Python interpreter):
+
+$> ./install.sh
+
+B- Installation without system administration previliges:
+
+B-1-
+ 
+$> ./install.sh <installation_path_with_permission_to_write>
+
+B-2- Set/update PYTHONPATH enviroment variable (put below in profile if you want it remain persistent in further sessions)
+
+$> export PYTHONPATH=$PYTHONPATH:<installation_path_with_permission_to_write>
+
+
+RUNNING
+
+To start using BIANA import biana library inside a Python script as follows:
+
+$> python
+>>> import biana
+BIANA> 
+
+If you get an import error check the INSTALLATION steps above.
+
+
+DOCUMENTATION
+
+Refer to BIANA tutorial in:
+<biana_source_dir>/doc/tutorial
+
+An extensive manual for BIANA is located at:
+<biana_source_dir>/doc/
+
+
+EXAMPLES
+
+Some scripts to handle common administration tasks and some simple examples can be found at:
+
+<biana_source_dir>/scripts/administration
+<biana_source_dir>/scripts/examples
+
+Alternatively you can access prepared scripts on sbi.imim.es/biana/scripts
+
+
+MORE INFO
+
+Visit http://sbi.imim.es/web/biana.php
+
+
