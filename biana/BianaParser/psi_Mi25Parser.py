@@ -76,9 +76,16 @@ class Psi_MiFormattedDBParser(BianaParser):
     external_entity_definition = "Each relation participant is considered as a distinct External Entity"
     external_entity_relations = "External Entity Relations"
     
-    
     dictDBNameToPrefix = {}
     #dictPrefixToDBName = {}
+
+    db_refs_to_ignore = set(["DOI", "CAMJEDB", "ECOGENE", "NEWT", "IMEX", 
+			    "AFCS", "PRIDE", "SO", "GRID", "GRID_LEGACY",
+			    "CDNA GI", "CDNA ACCESSION" "BRENDA", "PDBE", 
+			    "MATRIXDB", "MPIDB", "XENBASE", "VEGA", "BIOGRID",
+			    "CGNC", "BGD", "DICTYBASE", "MAIZEGDB", "ZFIN"
+			    "VECTORBASE", "MIRBASE"])
+    
     def __init__(self):
         # Start with the default values
         BianaParser.__init__(self, default_db_description = "PSI-MI formatted protein-protein interaction database",
@@ -183,6 +190,8 @@ class Psi_MiFormattedDBParser(BianaParser):
                     # Start new entry 
                     #print objInteractor.type.label
                     interactorType = self.decideInteractorTypeSpecificConversions(objInteractor.type.label)
+                    if interactorType == "ignore":
+			continue
                     if interactorType is None:
                         interactorType = self.decideInteractorTypeSpecificConversions(objInteractor.type.name)
                     psi_MiFormatted_object = ExternalEntity( source_database = self.database, type=interactorType) # "protein")
@@ -360,6 +369,10 @@ class Psi_MiFormattedDBParser(BianaParser):
         #    interactorTypeConverted = "RNA"
         elif interactorType == "small molecule":
             interactorTypeConverted = "compound"
+	elif interactorType == "poly a" or interactorType == "poly adenine": # from intact chemical synthesis file
+            interactorTypeConverted = "RNA"
+        elif interactorType == "complex":
+            interactorTypeConverted = "ignore"
         else:
             sys.stderr.write("Warning: Unkown interactor type: %s\n" %interactorType)
         return interactorTypeConverted
@@ -372,18 +385,10 @@ class Psi_MiFormattedDBParser(BianaParser):
             sequenceTypeConverted = "peptide"
         elif sequenceType == "peptide":
             sequenceTypeConverted = "peptide"
-        elif sequenceType == "dna":
-            sequenceTypeConverted = "dna"
-        elif sequenceType == "rna":
-            sequenceTypeConverted = "rna"
         elif sequenceType.endswith("dna"):
             sequenceTypeConverted = "dna"
         elif sequenceType.endswith("rna"):
             sequenceTypeConverted = "rna"
-        #elif sequenceType == "mrna":
-        #    sequenceTypeConverted = "rna"
-        #elif sequenceType == "ds dna":
-        #    sequenceTypeConverted = "dna"
         elif sequenceType == "nucleic acid":
             sequenceTypeConverted = "dna"
         else:
@@ -408,7 +413,13 @@ class Psi_MiFormattedDBParser(BianaParser):
             nameRoleConverted = "acceptor" 
         elif nameRole == "fluorescence donor":
             nameRoleConverted = "donor"
+        elif nameRole == "phosphate acceptor":
+            nameRoleConverted = "acceptor" 
+        elif nameRole == "phosphate donor":
+            nameRoleConverted = "donor"
         elif nameRole == "self":
+            nameRoleConverted = "self"
+        elif nameRole == "putative self":
             nameRoleConverted = "self"
         elif nameRole == "ancillary":
             nameRoleConverted = "ancillary"
@@ -426,6 +437,12 @@ class Psi_MiFormattedDBParser(BianaParser):
             nameRoleConverted = "donor"
         elif nameRole == "stimulator":
             nameRoleConverted = "stimulator"       
+        elif nameRole == "suppressor gene":
+            nameRoleConverted = "inhibitor"       
+        elif nameRole == "competitor":
+            nameRoleConverted = "competitor"       
+        elif nameRole == "fret pair":
+            nameRoleConverted = "ignore"       
         else:
             sys.stderr.write("Warning: decideRoleSpecificConversions - Unknown type identifier: %s\n" %nameRole)
             nameRoleConverted = "ignore" 
@@ -448,8 +465,13 @@ class Psi_MiFormattedDBParser(BianaParser):
             attributeName = "ignore"
         elif type == "synonym":
             attributeName = "ignore"
+        elif type == "author assigned name":
+            attributeName = "ignore"
+        elif type == "systematic name":
+            attributeName = "ignore"
         else:
             sys.stderr.write("Warning: decideAliasTypeSpecificConversions - Unknown type identifier: %s\n" %type)
+            attributeName = "ignore"
             
         return attributeName
     
@@ -474,7 +496,7 @@ class Psi_MiFormattedDBParser(BianaParser):
         if type == "identity":
             dictFieldType = "unique"
         
-        if dbUpper == "UNIPROTKB" or dbUpper == "UNIPROT" or dbUpper == "UNIPROT KNOWLEDGE BASE" or dbUpper == "SWISSPROT" or dbUpper == "TREMBL":
+        if dbUpper in ("UNIPROTKB", "UNIPROT", "UNIPROT KNOWLEDGE BASE", "SWISSPROT", "TREMBL", "UNIPROT/SWISS-PROT", "UNIPROT/TREMBL"):
             if id.startswith("unknown"):
                 dbNameConverted = "ignore"
             else:
@@ -513,6 +535,8 @@ class Psi_MiFormattedDBParser(BianaParser):
             # ENS[GBRM] -CGS - 
             #dictFieldValue = id[4:]
             #self.checkOrInsertDBNamePrefix(dbNameConverted, id[:4])
+        elif dbUpper == "ENSEMBLGENOMES":
+            dbNameConverted = "ensembl"
         elif dbUpper == "ENCODE":
             dbNameConverted = "encode"
 	        # not always starts with AC
@@ -560,7 +584,9 @@ class Psi_MiFormattedDBParser(BianaParser):
             dbNameConverted = "AccessionNumber"
             if self.sourcedb_name == "mint":
                 dictFieldValue = secondary
-        elif dbUpper == "GENBANK_PROTEIN_GI":
+	elif dbUpper == "GENBANK_NUCL_GI" or dbUpper == "GENBANK INDENTIFIER" or dbUpper=="NUCLEOTIDE GENBANK IDENTIFIER":
+            dbNameConverted = "GI"
+        elif dbUpper == "GENBANK_PROTEIN_GI" or dbUpper == "PROTEIN GENBANK IDENTIFIER":
             if id.lower().startswith("gi:"):
                 dictFieldValue = id[3:]
             dbNameConverted = "GI"
@@ -574,8 +600,8 @@ class Psi_MiFormattedDBParser(BianaParser):
             self.checkOrInsertDBNamePrefix(dbNameConverted, id[:4])
         elif dbUpper == "WORMBASE": # wormbase, WormBase
             dbNameConverted = "wormbasegeneid"
-            dictFieldValue = id[6:]
-            self.checkOrInsertDBNamePrefix(dbNameConverted, id[:6])
+            #dictFieldValue = id[6:]
+            #self.checkOrInsertDBNamePrefix(dbNameConverted, id[:6])
         elif dbUpper == "PUBMED":
     	    if id.startswith("unassigned"):
     	        dbNameConverted = "ignore"
@@ -608,15 +634,13 @@ class Psi_MiFormattedDBParser(BianaParser):
             dbNameConverted = "MIM"
         elif dbUpper == "INTENZ":
             dbNameConverted = "IntEnz"
-        elif dbUpper == "ENTREZGENE":
-            dbNameConverted = "geneID"
-        elif dbUpper == "ENTREZ GENE/LOCUSLINK":
+        elif dbUpper == "ENTREZGENE" or dbUpper == "ENTREZ GENE/LOCUSLINK":
             dbNameConverted = "geneID"
         elif dbUpper == "HPRD":
             dbNameConverted = "HPRD"
         elif dbUpper == "HGNC":
             dbNameConverted = "HGNC"
-        elif dbUpper == "MGI":
+        elif dbUpper == "MGI" or dbUpper == "MGD/MGI":
             dbNameConverted = "MGI"
         elif dbUpper == "TAIR":
             dbNameConverted = "TAIR"
@@ -628,33 +652,13 @@ class Psi_MiFormattedDBParser(BianaParser):
             dbNameConverted = "IMGT"
         elif dbUpper == "PSI-MI":
             dbNameConverted = "method_id"
-        elif dbUpper == "DOI":
-            dbNameConverted = "ignore"
-        elif dbUpper == "CAMJEDB":
-            dbNameConverted = "ignore"
-        elif dbUpper == "ecogene":
-            dbNameConverted = "ignore"
-        elif dbUpper == "NEWT":
-            dbNameConverted = "ignore"
-        elif dbUpper == "IMEX":
-            dbNameConverted = "ignore"
-        elif dbUpper == "AFCS":
-            dbNameConverted = "ignore"
-        elif dbUpper == "PRIDE":
-            dbNameConverted = "ignore"
-        elif dbUpper == "SO":
-            dbNameConverted = "ignore"
-        elif dbUpper == "GRID" or dbUpper == "GRID_LEGACY":
-            dbNameConverted = "ignore"
-        elif dbUpper == "CDNA GI":
-            dbNameConverted = "ignore"
-        elif dbUpper == "CDNA ACCESSION":
-            dbNameConverted = "ignore"
         elif dbUpper == "N/A":
+            dbNameConverted = "ignore"
+	elif dbUpper in Psi_MiFormattedDBParser.db_refs_to_ignore:
             dbNameConverted = "ignore"
         else:
             if db not in self.not_recognized_cross_refs:
-                sys.stderr.write("Warning: decideDBReferenceSpecificConversions - Unknown database identifier: %s" %db)
+                sys.stderr.write("Warning: decideDBReferenceSpecificConversions - Unknown database identifier: %s\n" %db)
                 self.not_recognized_cross_refs.add(db)
             #dbNameConverted = db.encode("ascii", "strict")
             dbNameConverted = "ignore"

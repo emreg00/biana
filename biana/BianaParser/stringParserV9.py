@@ -3,7 +3,7 @@ from biana.BianaDB import database
 from sets import *
 import os, fnmatch, re, sys
 import biana.biana_globals as biana_globals
-from biana.utilities import FastaIterator
+from biana.utilities import FastaReader
 
 class STRINGParser(BianaParser):
     """
@@ -83,7 +83,7 @@ class STRINGParser(BianaParser):
 
         ## insert the data of proteins one by one fetching sequence and protein from sequence file and then searching for the information of protein in alias table in database
 
-	fastaIterator = FastaIterator(sequences_file_fd)
+	fastaIterator = FastaReader.FastaIterator(sequences_file_fd)
 
 	for (sequence_name, sequence) in fastaIterator:
 
