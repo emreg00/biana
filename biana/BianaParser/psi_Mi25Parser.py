@@ -248,7 +248,8 @@ class Psi_MiFormattedDBParser(BianaParser):
                             self.addXRefAttributesToExternalEntityObject(experiment.xRef, psi_MiFormatted_object, flagIgnoreRefSecondary=True)
                         # Fill experiment identification method
                         ###self.addXRefAttributesToExternalEntityObject(experiment.xRefMethodInteraction, psi_MiFormatted_object, flagIgnoreRefSecondary=True)
-			if experiment.xRefMethodInteraction is not None:
+            # Some experiment.xRefMethodInteraction.refPrimary objects were "NoneType", and this was giving problems when parsing HPRD, so the second condition has been added by Quim Aguirre
+			if experiment.xRefMethodInteraction is not None and experiment.xRefMethodInteraction.refPrimary is not None:
 			    if experiment.xRefMethodInteraction.refPrimary.db == "psi-mi":
 				psi_MiFormatted_object.add_attribute(ExternalEntityRelationAttribute( attribute_identifier = "method_id", 
                                                                                                   value = experiment.xRefMethodInteraction.refPrimary.id[3:] ) )
