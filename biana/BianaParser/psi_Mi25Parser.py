@@ -194,6 +194,9 @@ class Psi_MiFormattedDBParser(BianaParser):
 			continue
                     if interactorType is None:
                         interactorType = self.decideInteractorTypeSpecificConversions(objInteractor.type.name)
+                        # Quim Aguirre: Condition added for skipping the cases in which objInteractor.type.name is also None in IntAct database
+                        if interactorType is None:
+                            continue
                     psi_MiFormatted_object = ExternalEntity( source_database = self.database, type=interactorType) # "protein")
                     psi_MiFormatted_object_number += 1
                     # Fill the new entry
