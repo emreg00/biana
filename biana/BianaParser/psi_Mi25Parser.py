@@ -194,6 +194,9 @@ class Psi_MiFormattedDBParser(BianaParser):
 			continue
                     if interactorType is None:
                         interactorType = self.decideInteractorTypeSpecificConversions(objInteractor.type.name)
+                        # Quim Aguirre: Condition added for skipping the cases in which objInteractor.type.name is also None in IntAct database
+                        if interactorType is None:
+                            continue
                     psi_MiFormatted_object = ExternalEntity( source_database = self.database, type=interactorType) # "protein")
                     psi_MiFormatted_object_number += 1
                     # Fill the new entry
@@ -248,7 +251,8 @@ class Psi_MiFormattedDBParser(BianaParser):
                             self.addXRefAttributesToExternalEntityObject(experiment.xRef, psi_MiFormatted_object, flagIgnoreRefSecondary=True)
                         # Fill experiment identification method
                         ###self.addXRefAttributesToExternalEntityObject(experiment.xRefMethodInteraction, psi_MiFormatted_object, flagIgnoreRefSecondary=True)
-			if experiment.xRefMethodInteraction is not None:
+            # Some experiment.xRefMethodInteraction.refPrimary objects were "NoneType", and this was giving problems when parsing HPRD, so the second condition has been added by Quim Aguirre
+			if experiment.xRefMethodInteraction is not None and experiment.xRefMethodInteraction.refPrimary is not None:
 			    if experiment.xRefMethodInteraction.refPrimary.db == "psi-mi":
 				psi_MiFormatted_object.add_attribute(ExternalEntityRelationAttribute( attribute_identifier = "method_id", 
                                                                                                   value = experiment.xRefMethodInteraction.refPrimary.id[3:] ) )
