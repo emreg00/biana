@@ -85,6 +85,9 @@ class GOOBOParser(BianaParser):
         term_part_of = []
         term_exact_synonyms = []
         term_related_synonyms = []
+        term_broad_synonyms = []
+        term_narrow_synonyms = []
+        term_alt_id = []
 
         self.initialize_input_file_descriptor()
 
@@ -93,7 +96,7 @@ class GOOBOParser(BianaParser):
         externalEntityRelation.add_attribute( ExternalEntityRelationAttribute( attribute_identifier = "go_name", value = None) )
 
 	def create_external_entity_from_go_term(database, term_id, term_name, 
-		term_namespace, term_def, term_exact_synonyms, term_related_synonyms):
+		term_namespace, term_def, term_exact_synonyms, term_related_synonyms, term_broad_synonyms, term_narrow_synonyms, term_alt_id):
 	    externalEntity = ExternalEntity( source_database = database, type = "GOElement" )
 	    
 	    externalEntity.add_attribute( ExternalEntityAttribute( attribute_identifier = "GO", value = term_id, type="unique") )
@@ -113,22 +116,43 @@ class GOOBOParser(BianaParser):
 									   type = "exact_synonym" ) )
                     
 	    for current_synonym in term_related_synonyms:
-		externalEntity.add_attribute( ExternalEntityAttribute( attribute_identifier = "GO_name",
-								       value = current_synonym,
-								       type = "related_synonym" ) )
+		if current_synonym is not None:
+		    externalEntity.add_attribute( ExternalEntityAttribute( attribute_identifier = "GO_name",
+		    						       value = current_synonym,
+		    						       type = "related_synonym" ) )
+                    
+	    for current_synonym in term_broad_synonyms:
+		if current_synonym is not None:
+		    externalEntity.add_attribute( ExternalEntityAttribute( attribute_identifier = "GO_name",
+		    						       value = current_synonym,
+		    						       type = "broad_synonym" ) )
+                    
+	    for current_synonym in term_narrow_synonyms:
+		if current_synonym is not None:
+		    externalEntity.add_attribute( ExternalEntityAttribute( attribute_identifier = "GO_name",
+		    						       value = current_synonym,
+		    						       type = "narrow_synonym" ) )
+                    
+        # Quim Aguirre: Adding the alternative GO ids as "alias" in GO table
+	    for current_alt_id in term_alt_id:
+		if current_alt_id is not None:
+		    externalEntity.add_attribute( ExternalEntityAttribute( attribute_identifier = "GO",
+		    						       value = current_alt_id,
+		    						       type = "alias" ) )
 	    return externalEntity
 
 
         for line in self.input_file_fd:
 
-            if re.search("\[Term\]",line):
+            # Quim Aguirre: I have included to recognise [Typedef], so that the [Term] entries are recorded well when they are finished and there is a [Typedef] afterwards
+            if re.search("\[Term\]",line) or re.search("\[Typedef\]",line):
                 # New term
                 if term_id is not None:
 
                     # insert previous
 		    externalEntity = create_external_entity_from_go_term(self.database, term_id, term_name, 
 			    term_namespace, term_def, term_exact_synonyms, 
-			    term_related_synonyms)
+			    term_related_synonyms, term_broad_synonyms, term_narrow_synonyms, term_alt_id)
 
                     self.biana_access.insert_new_external_entity( externalEntity )
 
@@ -145,50 +169,97 @@ class GOOBOParser(BianaParser):
                 term_part_of = []
                 term_exact_synonyms = []
                 term_related_synonyms = []
+                term_broad_synonyms = []
+                term_narrow_synonyms = []
+                term_alt_id = []
+
+                if re.search("\[Typedef\]",line):
+                    typedef = True
+                else:
+                    typedef = False
+
 
             elif re.search("^id\:",line):
+                if typedef == True: # If typedef tag is true, we do not want to record anything
+                    continue
+
                 temp = re.search("GO\:(\d+)",line)
                 
                 if temp:
                     term_id = temp.group(1)
 
             elif re.search("^name\:",line):
+                if typedef == True:
+                    continue
+
                 temp = re.search("name:\s+(.+)",line)
                 term_name = temp.group(1)
 
             elif re.search("^namespace\:",line):
+                if typedef == True:
+                    continue
+
                 temp = re.search("namespace:\s+(.+)",line)
                 term_namespace = temp.group(1)
 
             elif re.search("^def\:",line):
+                if typedef == True:
+                    continue
+
                 temp = re.search("\"(.+)\"",line)
                 term_def = temp.group(1)
 
             elif re.search("synonym\:",line):
+                if typedef == True:
+                    continue
+
                 temp = re.search("\"(.+)\"\s+(\w+)",line)
                 if temp.group(2) == "EXACT":
                     term_exact_synonyms.append(temp.group(1))
                 elif temp.group(2) == "RELATED":
                     term_related_synonyms.append(temp.group(1))
+                # Quim Aguirre: I have added the broad and narrow synonyms
+                elif temp.group(2) == "BROAD":
+                    term_broad_synonyms.append(temp.group(1))
+                elif temp.group(2) == "NARROW":
+                    term_narrow_synonyms.append(temp.group(1))
+
+            elif re.search("^alt_id\:",line):
+            # Quim Aguirre: Recognison of the "alt_id" tags
+            # Example --> alt_id: GO:0016425
+                if typedef == True:
+                    continue
+
+                temp = re.search("GO\:(\d+)",line)
+                
+                if temp:
+                    term_alt_id.append(temp.group(1))
 
             elif re.search("is_a\:",line):
+                if typedef == True:
+                    continue
+
                 temp = re.search("GO\:(\d+)",line)
                 if temp is not None:
                     #print "??:", line # malformation --> is_a: regulates ! regulates
                     term_is_a.append(temp.group(1))
 
             elif re.search("relationship\:",line):
+                if typedef == True:
+                    continue
+
                 if( re.search("part_of",line) ):
                     temp = re.search("part_of\s+GO\:(\d+)",line)
                     if temp is not None:
                         term_part_of.append(temp.group(1))
 
 	# Insert last term
-	externalEntity = create_external_entity_from_go_term(self.database, term_id, term_name, 
-		term_namespace, term_def, term_exact_synonyms, 
-		term_related_synonyms)
-	self.biana_access.insert_new_external_entity( externalEntity )
-	specific_identifiers_and_parent[term_id] = (externalEntity.get_id(), term_is_a, term_part_of)
+	if term_id is not None:
+	    externalEntity = create_external_entity_from_go_term(self.database, term_id, term_name, 
+		    term_namespace, term_def, term_exact_synonyms, 
+		    term_related_synonyms, term_broad_synonyms, term_narrow_synonyms, term_alt_id)
+	    self.biana_access.insert_new_external_entity( externalEntity )
+	    specific_identifiers_and_parent[term_id] = (externalEntity.get_id(), term_is_a, term_part_of)
 
         # Set the ontology hierarch and insert elements to ontology
         for current_method_id in specific_identifiers_and_parent:
