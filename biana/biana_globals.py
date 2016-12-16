@@ -139,7 +139,7 @@ EXTERNAL_ENTITY_GENERAL_ATTRIBUTES = []
 PROMISCUOUS_EXTERNAL_ENTITY_TYPES_DICT = [ ("SCOPElement", "PDB") ]
 
 
-VALID_IDENTIFIER_REFERENCE_TYPES = ["unique", "previous", "alias", "cross-reference", "synonym","short-name", "exact_synonym", "related_synonym"]
+VALID_IDENTIFIER_REFERENCE_TYPES = ["unique", "previous", "alias", "cross-reference", "synonym","short-name", "exact_synonym", "related_synonym", "broad_synonym", "narrow_synonym"]
 
 CROSSABLE_ATTRIBUTES = set(["sequence","taxid","ipi","uniprotentry","uniprotaccession","genesymbol","geneid","refseq","ec"])
 
