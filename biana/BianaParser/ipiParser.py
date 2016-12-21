@@ -172,11 +172,14 @@ class IPIParser(BianaParser):
                                                                      value = search.group(1),
 								     type = "cross-reference"))
 
+                # Quim Aguirre: Change to add the gene symbol using the regex, add multiple entries when necessary, and skip when '-'
                 search = gene_symbol_regex.search(line)
-                if search:
-                    ipi_object.add_attribute(ExternalEntityAttribute(attribute_identifier="geneSymbol",
-                                                                     value = actual_value,
-                                                                     type = "cross-reference" ))
+                gene_symbols = search.group(1).split(';')
+                for gene_symbol in gene_symbols:
+                    if search and gene_symbol != '-':
+                        ipi_object.add_attribute(ExternalEntityAttribute(attribute_identifier="geneSymbol",
+                                                                         value = gene_symbol,
+                                                                         type = "cross-reference" ))
 
                     search2 = re.search("[Emb|Gb]\|(\S+)",search.group(2))
                     if search2:

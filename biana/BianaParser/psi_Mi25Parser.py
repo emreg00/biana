@@ -455,9 +455,14 @@ class Psi_MiFormattedDBParser(BianaParser):
     def decideAliasTypeSpecificConversions(self, type):
         #nameType = ""
         attributeName = "ignore"
-        if type == "gene name" or type == "gene name synonym":
-            attributeName = "GeneSymbol"
+        if type == "gene name":
+            # Example of gene name: EEF1A2
+            attributeName = "GeneSymbol" # Quim Aguirre: If it is gene name, we will introduce it in the GeneSymbol table
             #nameType = "alias"
+        elif type == "gene name synonym":
+            # Example of gene name synonym: Eukaryotic elongation factor 1 A-2
+            attributeName = "ignore" # Quim Aguirre: If it is gene name synonym, we will ignore because we have enough information in the database
+            #nameType = "cross-reference"
         elif type == "orf name":
             attributeName = "orfName"
             #nameType = "cross-reference"

@@ -18,7 +18,6 @@
 """
 
 from bianaParser import *
-from sets import *
 import os
 from biana.BianaObjects.PDB import PDBFragment
 
@@ -96,7 +95,8 @@ class SCOPParser(BianaParser):
         if not self.input_file.endswith(os.sep):
             self.input_file += os.sep
 
-        scop_dir_cla_fd = file(self.input_file+"dir.cla.scop.txt_"+self.sourcedb_version.replace("\"",""),'r')
+        # dir.cla.scop(e).txt - Full classification for each domain
+        scop_dir_cla_fd = file(self.input_file+"dir.cla.scope."+self.sourcedb_version.replace("\"","")+"-stable.txt",'r')
 
         for line in scop_dir_cla_fd:
 
@@ -104,11 +104,13 @@ class SCOPParser(BianaParser):
 		continue
             
 	    line_fields = line.strip().split()   # line_fields[0] is complete pdb entry
-                                       		 # line_fields[1] is pdb code
+                                       		 # line_fields[1] is PDB ID code
 	                                         # line_fields[2] is pdb chain follow by : XX-YY (optional)
-        	                                 # line_fields[3] is ???
-                	                         # line_fields[4] is ???
-                        	                 # line_fields[5] is comma-separated codes
+        	                                 # line_fields[3] is sccs???
+                	                         # line_fields[4] is sunid???
+                        	                 # line_fields[5] is comma-separated codes: sunids of ancestor nodes in comma-delimited list
+
+        # Example --> d1ux8a_	1ux8	A:	a.1.1.1	113449	cl=46456,cf=46457,sf=46458,fa=46459,dm=46460,sp=116748,px=113449
 
             if len(line_fields) != 6:
                 # skip incomplete lines
@@ -137,7 +139,7 @@ class SCOPParser(BianaParser):
             hierarchy_dict["dm"][dm] = fa
 
             #sp_dict.setdefault(dm,new_list()).append(sp)
-            sp_dict.setdefault(dm,Set(new_list())).add(sp)
+            sp_dict.setdefault(dm,set(new_list())).add(sp)
             domains_dict.setdefault(dm,new_list()).append((pdb_code,range))
             #domains_to_id_dict[dm] = line_fields[3]
 
@@ -147,7 +149,8 @@ class SCOPParser(BianaParser):
         #print len(sp_dict), sp_dict
         #print len(domains_dict), domains_dict
 
-        scop_des_fd = file(self.input_file+"dir.des.scop.txt_"+self.sourcedb_version.replace("\"",""),'r')
+        # dir.des.scop(e).txt. - Descriptions for each node in the SCOP(e) hierarchy.
+        scop_des_fd = file(self.input_file+"dir.des.scope."+self.sourcedb_version.replace("\"","")+"-stable.txt",'r')
 
         for line in scop_des_fd:
 
@@ -155,7 +158,16 @@ class SCOPParser(BianaParser):
                 continue
 
 	    line_fields = line.strip().split("\t")
-            descriptions_dict[line_fields[1]][line_fields[0]] = line_fields[4]
+            # descriptions_dict["category"]["sunid"] = description
+            descriptions_dict[line_fields[1]][line_fields[0]] = line_fields[4] 
+
+                # line_fields[0] is sunid
+                # line_fields[1] is level: cl - class; cf - fold; sf - superfamily; fa - family; dm - protein; sp - species; px - domain
+	            # line_fields[2] is sccs
+        	    # line_fields[3] is sid or "-"
+                # line_fields[4] is description
+
+        # Example --> 46456	cl	a	-	All alpha proteins
 
         scop_des_fd.close()
 
